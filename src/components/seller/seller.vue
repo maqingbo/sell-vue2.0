@@ -1,6 +1,6 @@
 <template>
-  <div class="seller" ref="seller">
-    <div class="sell-content">
+  <div class="seller" ref="sellerw">
+    <div class="seller-content">
       <!-- 第一部分 -->
       <div class="base-info">
         <div class="name-wrapper">
@@ -9,9 +9,9 @@
             <span><star :size="36" :score="seller.score"></star></span>
             <span class="sellcount">月售{{seller.sellCount}}单</span>
           </div>
-          <div class="favourite">
-            <span class="icon">▽</span>
-            <span class="text">收藏</span>
+          <div class="favourite" @click="favouriteToggle">
+            <span class="icon icon-favorite" :class="{'active': favourite}"></span>
+            <span class="text">{{favouriteText}}</span>
           </div>
         </div>
         <div class="minprice-wrapper">
@@ -44,6 +44,30 @@
           </li>
         </ul>
       </div>
+
+      <split></split>
+
+      <!-- 第三部分/商家实景 -->
+      <div class="seller-pics">
+        <h2 class="title">商家实景</h2>
+        <div class="pic-wrapper" ref="picWrapper">
+          <ul class="pic-list" ref="picList">
+            <li v-for="pic in seller.pics" class="pic">
+              <img :src="pic" alt="pic">
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <split></split>
+
+      <!-- 第四部分/商家信息 -->
+      <div class="infos">
+        <h2 class="title">商家信息</h2>
+        <ul class="info-wrapper">
+          <li v-for="info in seller.infos" class="info">{{info}}</li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -59,32 +83,69 @@ export default {
       type: Object
     }
   },
+  data() {
+    return {
+      favourite: false
+    }
+  },
+  computed: {
+    favouriteText() {
+      return this.favourite ? '已收藏' : '收藏'
+    }
+  },
   created() {
     this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
   },
   watch: {
-    'seller'() {
+    seller: function() {
       this.$nextTick(() => {
         this._initScroll()
+        this._initPics()
       })
     }
   },
   mounted() {
     this.$nextTick(() => {
       this._initScroll()
-      // this._initPics()
+      this._initPics()
     })
   },
   methods: {
     // BScroll初始化函数
     _initScroll() {
       if (!this.scroll) {
-        this.scroll = new BScroll(this.$refs.seller, {
+        this.scroll = new BScroll(this.$refs.sellerw, {
           click: true
         })
       } else {
         this.scroll.refresh()
       }
+    },
+    // 商家实景/图片
+    _initPics() {
+      if (this.seller.pics) {
+        let picWidth = 120
+        let picMargin = 6
+        let width = (picWidth + picMargin) * (this.seller.pics.length - 1)
+        this.$refs.picList.style.width = width + 'px'
+        this.$nextTick(() => {
+          if (!this.picScroll) {
+            this.picScroll = new BScroll(this.$refs.picWrapper, {
+              scrollX: true,
+              eventPassthrouth: 'vertical'
+            })
+          } else {
+            this.picScroll.refresh()
+          }
+        })
+      }
+    },
+    favouriteToggle(event) {
+      if (!event._constructed) {
+        return
+      }
+      console.log(111)
+      this.favourite = !this.favourite
     }
   },
   components: {
@@ -98,6 +159,12 @@ export default {
 @import "../../../static/sass/index.scss";
 
   .seller {
+    position: absolute;
+    top: 174px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
     .base-info {
       padding: 0 18px;
       @include border-1px(#e6e7e8);
@@ -129,12 +196,17 @@ export default {
           right: 0;
           > span {
             display: block;
+            width: 36px;
+            height: auto;
             text-align: center;
           }
           .icon {
             font-size: 24px;
             line-height: 24px;
-            color: rgb(240,20,20);
+            color: #d4d6d9;
+            &.active {
+              color: rgb(240,20,20);
+            }
           }
           .text {
             font-size: 10px;
@@ -172,16 +244,20 @@ export default {
         }
       }
     }
+
     // 公告与活动
     .bulletin-wrapper {
+      box-sizing: border-box;
       padding: 18px;
       padding-bottom: 0;
+      @include border-1px(#e6e7e8);
       .title {
         font-size: 14px;
         line-height: 14px;
         color: rgb(7,17,27);
         margin-bottom: 8px;
       }
+      // 公告
       .bulletin {
         font-size: 12px;
         line-height: 24px;
@@ -191,6 +267,7 @@ export default {
         padding-bottom: 16px;
         @include border-1px(#e6e7e8);
       }
+      // 活动
       .supports {
         .support-item {
           width: 100%;
@@ -200,6 +277,9 @@ export default {
           padding-left: 34px;
           position: relative;
           @include border-1px(#e6e7e8);
+          &:last-child {
+            @include border-none;
+          }
           .icon {
             display: inline-block;
             position: absolute;
@@ -209,7 +289,7 @@ export default {
             height: 16px;
             border-radius: 2px;
             margin-right: 6px;
-            background-color: pink;
+            // background-color: pink;
             vertical-align: top;
             background-repeat: no-repeat;
             background-size: 16px 16px;
@@ -234,6 +314,67 @@ export default {
             line-height: 16px;
             font-weight: 200;
             color: rgb(7,17,27);
+          }
+        }
+      }
+    }
+
+    // 商家实景
+    .seller-pics {
+      padding: 18px;
+      padding-right: 0;
+      @include border-1px(#e6e7e8);
+      .title {
+        font-size: 14px;
+        line-height: 14px;
+        color: rgb(7,17,27);
+        margin-bottom: 8px;
+      }
+      .pic-wrapper {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        .pic-list {
+          font-size: 0;
+          .pic {
+            display: inline-block;
+            margin-right: 6px;
+            &:last-child {
+              margin-right: 0;
+            }
+            img {
+              height: 90px;
+              width: auto;
+            }
+          }
+        }
+      }
+    }
+
+    // 商家信息
+    .infos {
+      padding: 18px;
+      padding-bottom: 0;
+      .title {
+        font-size: 14px;
+        line-height: 14px;
+        color: rgb(7,17,27);
+        padding-bottom: 12px;
+        @include border-1px(#e6e7e8);
+      }
+      .info-wrapper {
+        .info {
+          box-sizing: border-box;
+          width: 100%;
+          height: auto;
+          padding: 16px 12px;
+          font-size: 12px;
+          font-weight: 200;
+          color: rgb(7,17,27);
+          line-height: 16px;
+          @include border-1px(#e6e7e8);
+          &:last-child {
+            @include border-none;
           }
         }
       }

@@ -1,5 +1,6 @@
 <template lang="html">
   <div class="header">
+    <!-- 信息展示 -->
     <div class="content-wrapper">
       <div class="avatar">
         <img width="64" height="64" :src="seller.avatar" alt="avatar">
@@ -17,16 +18,16 @@
           <span class="text">{{seller.supports[0].description}}</span>
         </div>
         <div v-if="seller.supports" class="support-count" @click="showDetail">
-          <div class="count">{{seller.supports.length}}个
-            <i class="icon">&gt;</i>
-          </div>
+          <div class="count">{{seller.supports.length}}个</div>
+          <i class="icon icon-keyboard_arrow_right"></i>
         </div>
       </div>
     </div>
+    <!-- 公告 -->
     <div class="bulletin-wrapper" @click="showDetail">
       <div class="title"></div>
       <div class="text">{{seller.bulletin}}</div>
-      <i class="icon">&gt;</i>
+      <i class="icon icon-keyboard_arrow_right"></i>
     </div>
     <div class="bg">
       <img :src="seller.avatar" alt="背景图">
@@ -60,7 +61,7 @@
           </div>
         </div>
         <div @click="detailClose" class="close">
-          <span class="icon">X</span>
+          <span class="icon icon-close"></span>
         </div>
       </div>
     </transition>
@@ -109,7 +110,7 @@ export default {
     overflow: hidden;
     .content-wrapper {
         position: relative;
-        padding: 24px 12px 18px 24px;
+        padding: 24px 24px 18px 24px;
         font-size: 0;
         .avatar {
             position: absolute;
@@ -166,21 +167,25 @@ export default {
                 position: absolute;
                 bottom: 15px;
                 right: 12px;
-                display: inline-block;
                 padding: 0 8px;
-                line-height: 28px;
-                font-size: 10px;
-                font-weight: 200;
+                // max-height: 24px;
+                overflow: hidden;
+                display: inline-block;
                 color: #fff;
                 background-color: rgba(0,0,0,.2);
                 border-radius: 14px;
-                vertical-align: middle;
-                .icon {
-                    width: 12px;
-                    height: 12px;
-                    line-height: 12px;
+                .count, .icon {
+                    display: inline-block;
+                    width: auto;
+                    height: 28px;
+                    line-height: 28px;
+                    font-size: 14px;
+                    font-weight: 200;
                     text-align: center;
-                    margin-left: 4px;
+                    vertical-align: middle;
+                }
+                .icon {
+                  margin-left: 2px;
                 }
             }
         }
@@ -214,13 +219,14 @@ export default {
         }
         .icon {
             display: inline-block;
-            width: 12px;
-            height: 12px;
-            line-height: 12px;
+            width: 28px;
+            height: 28px;
+            line-height: 28px;
+            font-size: 16px;
             text-align: center;
             position: absolute;
-            top: 8px;
-            right: 12px;
+            top: 0;
+            right: 0;
             // background-color: pink;
         }
     }

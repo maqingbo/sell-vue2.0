@@ -1,9 +1,13 @@
 <template>
 <div class="cartcontrol">
-  <div class="cart-add" @click.stop.prevent="addCart">+</div>
+  <div class="cart-add" @click.stop.prevent="addCart">
+    <span class="icon icon-add_circle"></span>
+  </div>
   <transition-group name="move">
     <div key="cart-count" class="cart-count" v-show="food.count > 0">{{food.count}}</div>
-    <div key="cart-decrease" class="cart-decrease" v-show="food.count > 0" @click.stop.prevent="decreaseCart">-</div>
+    <div key="cart-decrease" class="cart-decrease" v-show="food.count > 0" @click.stop.prevent="decreaseCart">
+      <span class="icon icon-remove_circle_outline"></span>
+    </div>
   </transition-group>
 </div>
 </template>
@@ -57,9 +61,9 @@ export default {
         line-height: 24px;
         text-align: center;
         font-size: 24px;
-        color: #fff;
+        color: #00a0dc;
         border-radius: 50%;
-        background-color: #00a0dc;
+        background-color: #fff;
     }
     // 过度动画
     .move-enter-active,
@@ -77,14 +81,14 @@ export default {
         transform: translate3d(0,0,0);
     }
     // 过度动画-结束
-    .cart-decrease {
-        width: 18px;
-        height: 18px;
-        border: 3px solid #00a0dc;
-        line-height: 14px;
-        color: #00a0dc;
-        background-color: #fff;
-    }
+    // .cart-decrease {
+    //     .icon {
+    //       width: 24px;
+    //       height: 24px;
+    //       color: #00a0dc;
+    //       background-color: #fff;
+    //     }
+    // }
     .cart-count {
         font-size: 10px;
         color: rgb(147,153,159);

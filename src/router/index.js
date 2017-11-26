@@ -35,6 +35,6 @@ const router = new Router({
 })
 
 // 默认指向goods路径
-router.push('seller')
+router.push('goods')
 
 export default router

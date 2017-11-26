@@ -6,7 +6,7 @@
         <!-- 购物车小图标 -->
         <div class="logo-wrapper">
           <div class="logo" :class="{'height-light': totalCount > 0}">
-            <span class="icon">O</span>
+            <span class="icon icon-shopping_cart"></span>
           </div>
           <div v-show="totalCount > 0" class="num">{{totalCount}}</div>
         </div>
@@ -213,6 +213,11 @@ export default {
                         }
                     }
                     .icon {
+                        display: inline-block;
+                        width: 44px;
+                        height: 44px;
+                        line-height: 44px;
+                        text-align: center;
                         font-size: 24px;
                         color: rgba(255,255,255,.4);
                     }

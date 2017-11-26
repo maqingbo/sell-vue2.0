@@ -8,7 +8,7 @@
         <div class="img">
           <img :src="food.image">
           <div class="back" @click="hide">
-            <span class="icon">&lt;</span>
+            <span class="icon icon-arrow_lift"></span>
           </div>
         </div>
         <div class="text">
@@ -230,11 +230,11 @@ export default {
                     display: inline-block;
                     width: 30px;
                     height: 30px;
-                    font-size: 20px;
-                    background-color: rgba(7,17,27,.2);
-                    color: #fff;
                     line-height: 30px;
                     text-align: center;
+                    font-size: 16px;
+                    background-color: rgba(7,17,27,.3);
+                    color: #fff;
                 }
             }
         }

@@ -11,9 +11,7 @@ module.exports = {
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    // fonts 路径问题解决方案（不可用）
-    // assetsSubDirectory: 'AbsolutePath/projectPath/static',
-    assetsPublicPath: '/',
+    assetsPublicPath: '/elm/',
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.

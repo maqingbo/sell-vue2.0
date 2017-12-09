@@ -144,7 +144,7 @@ export default {
       if (!event._constructed) {
         return
       }
-      console.log(111)
+      // console.log(111)
       this.favourite = !this.favourite
     }
   },

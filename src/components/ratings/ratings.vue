@@ -72,7 +72,7 @@ import {
   formatDate
 } from '../../../static/js/date.js'
 
-const ERR_OK = 0
+// const ERR_OK = 0
 const ALL = 2
 
 export default {
@@ -108,11 +108,23 @@ export default {
   },
   created() {
     // 获取数据
-    this.$http.get('/api/ratings').then(response => {
-      response = response.body
-      // console.log(response)
-      if (response.errno === ERR_OK) {
-        this.ratings = response.data
+    // this.$http.get('/api/ratings').then(response => {
+    //   response = response.body
+    //   // console.log(response)
+    //   if (response.errno === ERR_OK) {
+    //     this.ratings = response.data
+    //     // console.log(this.ratings)
+    //     this.$nextTick(() => {
+    //       this._initScroll()
+    //     })
+    //   }
+    // })
+
+    // 七牛云存储 data.json
+    this.$http.get('http://oq6glhzmw.bkt.clouddn.com/data.json').then(response => {
+      // console.log(response.body.ratings)
+      if (response.status === 200) {
+        this.ratings = response.body.ratings
         // console.log(this.ratings)
         this.$nextTick(() => {
           this._initScroll()

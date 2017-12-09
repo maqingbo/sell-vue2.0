@@ -24,7 +24,7 @@
 <script>
 import header from './components/header/header'
 
-const ERR_OK = 0
+// const ERR_OK = 0
 
 export default {
   data() {
@@ -33,12 +33,12 @@ export default {
     }
   },
   created() {
-    this.$http.get('/api/seller').then((response) => {
+    this.$http.get('http://oq6glhzmw.bkt.clouddn.com/data.json').then((response) => {
+      // console.log('app.vue')
       // console.log(response.body)
-      let res = response.body
-      if (res.errno === ERR_OK) {
-        // console.log(res.data)
-        this.seller = res.data
+      if (response.status === 200) {
+        // console.log(response.body.seller)
+        this.seller = response.body.seller
       }
     })
   },

@@ -57,7 +57,7 @@ import cartcontrol from '../cartcontrol/cartcontrol'
 import food from '../food/food'
 import BScroll from 'better-scroll'
 
-const ERR_OK = 0
+// const ERR_OK = 0
 
 export default {
   props: {
@@ -91,11 +91,11 @@ export default {
   },
   created() {
     // 获取数据
-    this.$http.get('/api/goods').then(response => {
-      response = response.body
-      // console.log(response)
-      if (response.errno === ERR_OK) {
-        this.goods = response.data
+    // 七牛云存储 data.json
+    this.$http.get('http://oq6glhzmw.bkt.clouddn.com/data.json').then(response => {
+      // console.log(response.body.goods)
+      if (response.status === 200) {
+        this.goods = response.body.goods
         // console.log(this.goods)
         this.$nextTick(() => {
           this._initBScroll()

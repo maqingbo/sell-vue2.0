@@ -15,21 +15,29 @@ Vue.use(Router)
 // 或者，只是一个组件配置对象。
 
 const router = new Router({
+  mode: 'history',
+  base: '/elm/',
   routes: [
+    // 地址为空时跳转home页面
     {
+      path: '',
+      redirect: '/goods'
+    }, {
       path: '/goods',
       name: 'goods',
       component: goods
-    },
-    {
+    }, {
       path: '/ratings',
       name: 'ratings',
       component: ratings
-    },
-    {
+    }, {
       path: '/seller',
       name: 'seller',
       component: seller
+    }, {
+      path: '/elm',
+      redirect: '/elm/goods'
+      // elm为所放置的文件夹名称，不修改的话可能会无法显示页面
     }
   ]
 })

@@ -1,3 +1,11 @@
+/**
+ * @Author: wmaqingbo
+ * @Date:   2017-10-20 18:43
+ * @Email:  wmaqingbo@163.com
+ * @Last modified by:   wmaqingbo
+ * @Last modified time: 2017-12-11 21:31
+ */
+
 import Vue from 'vue'
 import Router from 'vue-router'
 
@@ -16,6 +24,7 @@ Vue.use(Router)
 
 const router = new Router({
   mode: 'history',
+  // 生产环境去掉下面一行注释
   base: '/elm/',
   routes: [
     // 地址为空时跳转home页面

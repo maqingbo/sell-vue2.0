@@ -1,3 +1,11 @@
+/**
+ * @Author: wmaqingbo
+ * @Date:   2017-10-20 18:43
+ * @Email:  wmaqingbo@163.com
+ * @Last modified by:   wmaqingbo
+ * @Last modified time: 2017-12-11 21:56
+ */
+
 'use strict'
 const path = require('path')
 const config = require('../config')
@@ -39,7 +47,7 @@ exports.cssLoaders = function (options) {
       return ExtractTextPlugin.extract({
         use: loaders,
         // 注意配置这一部分，根据目录结构自由调整
-        // publicPath: '../../',
+        publicPath: '../../elm/',
         fallback: 'vue-style-loader'
       })
     } else {

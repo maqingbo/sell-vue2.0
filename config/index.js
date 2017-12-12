@@ -1,3 +1,10 @@
+/**
+ * @Author: wmaqingbo
+ * @Date:   2017-10-20 18:43
+ * @Email:  wmaqingbo@163.com
+ * @Last modified by:   wmaqingbo
+ * @Last modified time: 2017-12-11 21:31
+ */
 
 'use strict'
 // Template version: 1.1.3
@@ -11,6 +18,9 @@ module.exports = {
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
+    // dev
+    // assetsPublicPath: './',
+    // prod
     assetsPublicPath: '/elm/',
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as

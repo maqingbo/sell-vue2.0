@@ -49,7 +49,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import 'static/sass/mixin.scss';
+@import '~@/common/sass/mixin.scss';
 
 #app {
     .tab {

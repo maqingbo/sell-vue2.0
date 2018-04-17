@@ -1,4 +1,4 @@
-$icomoon-font-path: '/static/fonts' !default;
+$icomoon-font-path: '~@/common/fonts' !default;
 $icon-add_circle: '\e900';
 $icon-arrow_lift: '\e901';
 $icon-check_circle: '\e902';
@@ -9,7 +9,6 @@ $icon-remove_circle_outline: '\e906';
 $icon-shopping_cart: '\e907';
 $icon-thumb_down: '\e908';
 $icon-thumb_up: '\e909';
-
 @font-face {
   font-family: 'sell-icon';
   src: url('#{$icomoon-font-path}/sell-icon.ttf?9igjk') format('truetype'), url('#{$icomoon-font-path}/sell-icon.woff?9igjk') format('woff'), url('#{$icomoon-font-path}/sell-icon.svg?9igjk#sell-icon') format('svg');

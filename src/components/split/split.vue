@@ -7,7 +7,7 @@ export default {}
 </script>
 
 <style lang="scss">
-@import '../../../static/sass/index';
+@import "~@/common/sass/index.scss";
 
 .split {
     width: 100%;

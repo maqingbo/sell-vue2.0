@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import vueResource from 'vue-resource'
 
-import '../static/sass/index.scss'
+import '@/common/sass/index.scss'
 
 Vue.use(vueResource)
 

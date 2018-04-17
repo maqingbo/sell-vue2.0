@@ -87,7 +87,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../../static/sass/index.scss";
+@import "~@/common/sass/index.scss";
 
   .ratingselect {
     // background-color: pink;

@@ -43,7 +43,7 @@ export default {
 }
 </script>
 <style lang="scss">
-@import "../../../static/sass/index.scss";
+@import "~@/common/sass/index.scss";
 
 .star {
     font-size: 0;

@@ -87,7 +87,7 @@ import split from '../split/split'
 import cartcontrol from '../cartcontrol/cartcontrol'
 import ratingselect from '../ratingselect/ratingselect'
 import BScroll from 'better-scroll'
-import {formatDate} from '../../../static/js/date.js'
+import {formatDate} from '@/common/js/date.js'
 import Vue from 'vue'
 
 // const POSITIVE = 0
@@ -186,7 +186,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../../static/sass/index.scss";
+@import "~@/common/sass/index.scss";
 
 .slide-enter-active,
 .slide-leave-active {

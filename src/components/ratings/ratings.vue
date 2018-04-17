@@ -70,7 +70,7 @@ import ratingselect from '../ratingselect/ratingselect'
 import BScroll from 'better-scroll'
 import {
   formatDate
-} from '../../../static/js/date.js'
+} from '@/common/js/date.js'
 
 // const ERR_OK = 0
 const ALL = 2
@@ -174,7 +174,7 @@ export default {
 }
 </script>
 <style lang="scss">
-@import "../../../static/sass/index.scss";
+@import "~@/common/sass/index.scss";
 
 .ratings {
     position: absolute;

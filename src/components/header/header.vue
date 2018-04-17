@@ -101,7 +101,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../../static/sass/index.scss";
+@import "~@/common/sass/index.scss";
 
 .header {
     position: relative;

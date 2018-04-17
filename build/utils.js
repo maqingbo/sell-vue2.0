@@ -47,7 +47,7 @@ exports.cssLoaders = function (options) {
       return ExtractTextPlugin.extract({
         use: loaders,
         // 注意配置这一部分，根据目录结构自由调整
-        publicPath: '../../elm/',
+        publicPath: '../../',
         fallback: 'vue-style-loader'
       })
     } else {

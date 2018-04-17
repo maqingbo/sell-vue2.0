@@ -23,9 +23,9 @@ Vue.use(Router)
 // 或者，只是一个组件配置对象。
 
 const router = new Router({
-  mode: 'history',
+  // mode: 'history',
   // 生产环境去掉下面一行注释
-  base: '/elm/',
+  // base: '/elm/',
   routes: [
     // 地址为空时跳转home页面
     {

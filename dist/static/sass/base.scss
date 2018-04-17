@@ -1,0 +1,19 @@
+body,
+html {
+  font-family: 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif;
+  font-size: 10px;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.clearfix {
+  // *zoom: 1;
+  &::after,
+  &::before {
+    display: inline-block;
+    visibility: hidden;
+    clear: both;
+    height: 0;
+    content: ' ';
+  }
+}

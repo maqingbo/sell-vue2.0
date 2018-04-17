@@ -1,0 +1,62 @@
+@mixin border-1px($color) {
+  position: relative;
+
+  &::after {
+    border-top: 1px solid $color;
+    bottom: 0;
+    content: ' ';
+    display: block;
+    left: 0;
+    position: absolute;
+    width: 100%;
+  }
+}
+@mixin border-none {
+  &::after {
+    display: none;
+  }
+}
+// @2x、@3x背景图切换
+@mixin bg-image($url) {
+  background-image: url($url + '@2x.png');
+  // stylelint-disable-next-line
+  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
+    background-image: url($url + '@3x.png');
+  }
+}
+@mixin text-ellipsis {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+// 优惠活动小图标部分
+@mixin icon-map($value:12px) {
+  display: inline-block;
+  width: $value;
+  height: $value;
+  // margin-right: 4px;
+  vertical-align: top;
+  background-repeat: no-repeat;
+  background-size: $value $value;
+
+  &.decrease {
+    @include bg-image('decrease_1');
+  }
+
+  &.discount {
+    @include bg-image('discount_1');
+  }
+
+  &.special {
+    @include bg-image('special_1');
+  }
+
+  &.invoice {
+    @include bg-image('invoice_1');
+  }
+
+  &.guarantee {
+    @include bg-image('guarantee_1');
+  }
+}

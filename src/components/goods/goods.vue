@@ -3,7 +3,7 @@
     <!-- 左侧目录 -->
     <div class="menu-wrapper" ref="menuWrapper">
       <ul>
-        <li class="menu-item" v-for="item in goods">
+        <li class="menu-item" v-for="(item,index) in goods" :class="{'current': currentIndex === index}">
           <span class="text">
             <span v-if="item.type > 0" class="icon" :class="classMap[item.type]"></span>
             {{item.name}}
@@ -15,7 +15,7 @@
     <!-- 右侧商品列表 -->
     <div class="foods-wrapper" ref="foodsWrapper">
       <ul>
-        <li v-for="item in goods" class="foods">
+        <li v-for="item in goods" class="foods foods-hook">
           <div class="text">{{item.name}}</div>
           <ul class="food-list">
             <li @click="selectFood(food, $event)" v-for="(food,key) in item.foods" :key="food.key" class="food">
@@ -68,7 +68,9 @@ export default {
   data() {
     return {
       goods: [],
-      selectedFood: {}
+      selectedFood: {},
+      listHeight: [],
+      scrollY: 0
     }
   },
   components: {
@@ -87,6 +89,15 @@ export default {
         })
       })
       return foods
+    },
+    currentIndex() {
+      for (var i = 0; i < this.listHeight.length; i++) {
+        let height1 = this.listHeight[i]
+        let height2 = this.listHeight[i + 1]
+        if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
+          return i
+        }
+      }
     }
   },
   created() {
@@ -99,6 +110,7 @@ export default {
         // console.log(this.goods)
         this.$nextTick(() => {
           this._initBScroll()
+          this._calculateHeight()
         })
       }
     })
@@ -109,8 +121,29 @@ export default {
   methods: {
     // 将BScroll初始化写成一个方法
     _initBScroll() {
-      this.menuScroll = new BScroll(this.$refs.menuWrapper, {click: true})
-      this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {click: true})
+      this.menuScroll = new BScroll(this.$refs.menuWrapper, {
+        click: true
+      })
+      this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
+        click: true,
+        probeType: 3
+      })
+
+      // 右侧列表在滚动时拿到滚动的高度
+      this.foodsScroll.on('scroll', (pos) => {
+        this.scrollY = Math.abs(Math.round(pos.y))
+      })
+    },
+    // 计算 listHeight(一个递增的数组)
+    _calculateHeight() {
+      let foods = this.$refs.foodsWrapper.getElementsByClassName('foods-hook')
+      let height = 0
+      this.listHeight.push(height)
+      for (var i = 0; i < foods.length; i++) {
+        height += foods[i].clientHeight
+        this.listHeight.push(height)
+      }
+      console.log(this.listHeight)
     },
     // 打开所选 food 的详情页
     selectFood(food, event) {
@@ -138,19 +171,27 @@ export default {
         width: 80px;
         height: 100%;
         background-color: #f3f5f7;
+
         .menu-item {
             display: table;
             box-sizing: border-box;
             width: 80px;
             height: 54px;
             padding: 0 12px;
+
             &.current {
+                position: relative;
+                z-index: 10;
+                margin-top: -1px;
+                font-weight: 700;
                 background-color: #fff;
+
                 .text {
                     font-weight: bold;
                     @include border-none;
                 }
             }
+
             .text {
                 display: table-cell;
                 vertical-align: middle;
@@ -158,6 +199,7 @@ export default {
                 line-height: 14px;
                 color: #07111b;
                 @include border-1px(rgba(7,17,27,.1));
+
                 .icon {
                     display: inline-block;
                     width: 12px;
@@ -186,17 +228,21 @@ export default {
                 border-left: 2px solid #d9dde1;
                 // margin-bottom: 10px;
             }
+
             .food-list {
                 // width: 100%;
                 height: auto;
                 padding: 0 18px;
+
                 .food {
                     padding: 18px 0;
                     position: relative;
                     @include border-1px(rgba(7,17,27,.1));
+
                     &:last-child {
                         @include border-none;
                     }
+
                     .img {
                         position: absolute;
                         top: 18px;
@@ -204,11 +250,13 @@ export default {
                         width: 57px;
                         max-height: 57px;
                         overflow: hidden;
+
                         img {
                             width: 57px;
                             height: auto;
                         }
                     }
+
                     .detail {
                         width: 100%;
                         height: auto;
@@ -223,6 +271,7 @@ export default {
                             color: rgb(7,17,27);
                             // margin-top: 4px;
                         }
+
                         .description,
                         .sell-count-wrapper {
                             font-size: 10px;
@@ -231,17 +280,21 @@ export default {
                             margin-top: 8px;
                             overflow: hidden;
                         }
+
                         .description {
                             line-height: 12px;
                         }
+
                         .sell-count-wrapper {
                             .sell-count {
                                 margin-right: 12px;
                                 vertical-align: top;
                             }
                         }
+
                         .money {
                             margin-top: 4px;
+
                             .price {
                                 display: inline-block;
                                 font-size: 14px;
@@ -250,6 +303,7 @@ export default {
                                 font-weight: 700;
                                 margin-right: 8px;
                                 vertical-align: baseline;
+
                                 .icon {
                                     font-size: 10px;
                                     line-height: 24px;
@@ -257,12 +311,14 @@ export default {
                                     vertical-align: baseline;
                                 }
                             }
+
                             .old-price {
                                 font-size: 10px;
                                 line-height: 22px;
                                 color: rgb(147,153,159);
                                 font-weight: normal;
                                 text-decoration: line-through;
+
                                 .icon {
                                     vertical-align: middle;
                                 }

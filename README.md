@@ -7,13 +7,11 @@
 ![](http://oq6glhzmw.bkt.clouddn.com/sell-vue-01.png)
 ![](http://oq6glhzmw.bkt.clouddn.com/sell-vue-02.png)
 
-## 运行动图
-
-[播放请点击这里](http://oq6glhzmw.bkt.clouddn.com/eleme.gif)
-
 ## 在线地址
 
-[个人作品 - 外卖 SPA](http://maqingbo.top/elm/goods)
+[个人作品 - 仿饿了么外卖APP](http://maqingbo.top/elm)
+
+> 移动端项目，请使用浏览器的F12开发者工具模拟器查看效果
 
 ## how to run
 

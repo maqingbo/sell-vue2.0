@@ -4,8 +4,8 @@
 
 ## 运行截图
 
-![](http://oq6glhzmw.bkt.clouddn.com/sell-vue-01.png)
-![](http://oq6glhzmw.bkt.clouddn.com/sell-vue-02.png)
+![](./src/common/imgs/pic1.png)
+![](./src/common/imgs/pic2.png)
 
 ## 在线地址
 

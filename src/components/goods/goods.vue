@@ -3,7 +3,7 @@
     <!-- 左侧目录 -->
     <div class="menu-wrapper" ref="menuWrapper">
       <ul>
-        <li class="menu-item" v-for="(item,index) in goods" :class="{'current': currentIndex === index}">
+        <li class="menu-item" v-for="(item,index) in goods" :class="{'current': currentIndex === index}" @click="selectMenu(index, $event)">
           <span class="text">
             <span v-if="item.type > 0" class="icon" :class="classMap[item.type]"></span>
             {{item.name}}
@@ -140,7 +140,8 @@ export default {
       let height = 0
       this.listHeight.push(height)
       for (var i = 0; i < foods.length; i++) {
-        height += foods[i].clientHeight
+        let item = foods[i]
+        height += item.clientHeight
         this.listHeight.push(height)
       }
       console.log(this.listHeight)
@@ -149,6 +150,14 @@ export default {
     selectFood(food, event) {
       this.selectedFood = food
       this.$refs.food.show()
+    },
+    selectMenu(index, event) {
+      if (!event._constructed) {
+        return false
+      }
+      let foods = this.$refs.foodsWrapper.getElementsByClassName('foods-hook')
+      let el = foods[index]
+      this.foodsScroll.scrollToElement(el, 300)
     }
   }
 }
